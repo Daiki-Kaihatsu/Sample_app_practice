@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     #登録が成功したら成功のメッセージを描画する
     @user = User.new(user_params)
     if @user.save
+      log_in @user
       flash[:success] = "登録は成功しました"
       #redirect_to user_url(@user)と同じ
       redirect_to @user
