@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       #ログインメソッドを経由してsessionを保持する。
       log_in user
       #ユーザがログイン後にユーザ情報のページにリダイレクトする
-      redirect_to user
+     redirect_back_or user
     else
       #エラーメッセージを作成する
       flash.now[:danger] = 'Invalid email/password combination'

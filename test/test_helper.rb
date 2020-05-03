@@ -13,4 +13,20 @@ class ActiveSupport::TestCase
   def is_logged_in?
     !session[:user_id].nil?
   end
+  
+    # テストユーザーとしてログインする
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+  
+  class ActionDispatch::IntegrationTest
+
+  # テストユーザーとしてログインする
+  #統合テストではsessionを直接取り扱うことができないので、代わりにSessionsリソースに対してpostを送信することで代用
+  def log_in_as(user, password: 'password')
+    post login_path, params: { session: { email: user.email,
+                                          password: password
+                                           } }
+  end
+end
 end
